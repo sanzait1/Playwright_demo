@@ -3,7 +3,6 @@ const { Given, When, Then } = require('@cucumber/cucumber');
 const PageInstanceFactory = require('../../pageObjectModel/pageInstance');
 
 const { expect } = require('@playwright/test');
-const BasePage = require('../../pageObjectModel/BasePage');
 
 const value_map = new Map();
 
@@ -29,6 +28,19 @@ When('User click {string} in {string}', async function (locatorName, pageName){
       const basePage = PageInstanceFactory.getPageInstance(pageName);
       const locator = Reflect.get(basePage, locatorName);
       await basePage.click(locator);
+      console.log("clicked now")
+  } 
+  catch (error){
+      console.error(`Step failed due to:`, error)
+      //throw new Error(`Doing Exit`);
+    }
+});
+
+When('User click {string} with index {string} in {string}', async function (locatorName, index, pageName){
+  try {
+      const basePage = PageInstanceFactory.getPageInstance(pageName);
+      const locator = Reflect.get(basePage, locatorName);
+      await basePage.clickNthElement(locator, index);
       console.log("clicked now")
   } 
   catch (error){

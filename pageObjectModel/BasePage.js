@@ -44,6 +44,20 @@ class BasePage {
         }
     }
 
+    async clickNthElement(locator, index) {
+        try {
+            // Attempt to get the text using innerText()
+            const field = await global.page.locator(locator);
+            let num = Number(index);
+            await field[index].click()
+            //await field.click()
+        } catch (error) {
+            // Log the error and throw it, or return a default value
+            console.error(`Failed to click for locator: ${locator}`, error)
+            throw new Error(`Error clicking against locator: ${locator}`)
+        }
+    }
+
     async getLocatorCount(locator){
         try {
             // Attempt to get the text using innerText()

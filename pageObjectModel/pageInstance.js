@@ -1,4 +1,5 @@
 const InventoryPage = require("./InventoryPage");
+const CartPage = require("./cartPage");
 const LoginPage = require("./loginPage");
 
 const PageEnum = {
@@ -19,7 +20,7 @@ class PageInstanceFactory {
           result = new InventoryPage();
           break;
         case PageEnum.CART_PAGE:
-          result = new CART_PAGE();
+          result = new CartPage();
           break;   
         default:
           throw new Error('Unknown page type');
