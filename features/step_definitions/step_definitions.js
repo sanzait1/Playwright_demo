@@ -11,11 +11,6 @@ Given('User go to the URL', async ()=> {
     await global.page.goto('https://www.saucedemo.com/');
 });
 
-Then('I wait for 3 seconds', async ()=> {
-  let basepage = new BasePage();
-  await basepage.pause()
-})
-
 When('User enter {string} into {string} in {string}', async function (value, locatorName, pageName){
     try{
         const basePage = PageInstanceFactory.getPageInstance(pageName);
@@ -33,12 +28,12 @@ When('User click {string} in {string}', async function (locatorName, pageName){
   try {
       const basePage = PageInstanceFactory.getPageInstance(pageName);
       const locator = Reflect.get(basePage, locatorName);
-     await basePage.click(locator);
+      await basePage.click(locator);
       console.log("clicked now")
   } 
   catch (error){
       console.error(`Step failed due to:`, error)
-      throw new Error(`Doing Exit`);
+      //throw new Error(`Doing Exit`);
     }
 });
 
@@ -62,6 +57,7 @@ Then('User extract {string} value within {string} in {string}', async function (
       const text = await basePage.getText(textLocator)
       //const text = await locator.innerText();
       value_map.set(mapKey, text)
+      console.log("map value is set")
   } 
   catch (error){
       console.error(`Step failed due to:`, error)

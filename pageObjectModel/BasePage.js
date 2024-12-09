@@ -1,11 +1,6 @@
 
 class BasePage {
-
-    async pause() {
-        // Wait for 5 seconds
-        await page.waitForTimeout(5000)
-      }
-
+    
     async enterText(locator, text){
         try{
             console.log("Pausing for 5 seconds...");

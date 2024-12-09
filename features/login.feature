@@ -9,7 +9,6 @@ Feature: Perform sanity scenarios for the website
       When User enter "standard_user" into "usernameField" in "LOGIN_PAGE"
       When User enter "secret_sauce" into "passwordField" in "LOGIN_PAGE"
       When User click "loginButton" in "LOGIN_PAGE"
-      #Then I wait for 3 seconds
       Then User should see "swagLabs_title" in "INVENTORY_PAGE"
       When User extract "firstItemName" value within "InventoryItemValue" in "INVENTORY_PAGE"
       When User extract "firstItemPrice" value within "InventoryPriceValue" in "INVENTORY_PAGE"
