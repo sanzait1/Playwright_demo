@@ -1,7 +1,7 @@
 
 const BasePage = require('./BasePage');
 
-class LoginPage extends BasePage{
+class LoginPage extends BasePage {
 
     constructor() {
         super();
@@ -9,8 +9,6 @@ class LoginPage extends BasePage{
         this.passwordField = '[data-test="password"]'; // Replace with the actual CSS selector or XPath
         this.loginButton = '#login-button'; // Replace with the actual CSS selector or XPath
     }
-       
-
 }
 
 module.exports = LoginPage;

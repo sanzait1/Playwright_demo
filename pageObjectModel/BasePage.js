@@ -1,8 +1,8 @@
 
 class BasePage {
-    
-    async enterText(locator, text){
-        try{
+
+    async enterText(locator, text) {
+        try {
             console.log("Pausing for 5 seconds...");
             const field = await global.page.locator(locator)
             console.log("created field")
@@ -12,7 +12,7 @@ class BasePage {
             await field.fill(text)
             //await global.page.locator(locator).fill(text);
             console.log("entered the text")
-        }catch (error) {
+        } catch (error) {
             // Log the error and throw it, or return a default value
             console.error(`Failed to enter text against locator: ${locator}`, error)
             throw new Error(`Error entering text for locator: ${locator}`);
@@ -58,7 +58,7 @@ class BasePage {
         }
     }
 
-    async getLocatorCount(locator){
+    async getLocatorCount(locator) {
         try {
             // Attempt to get the text using innerText()
             const field = await global.page.locator(locator)
@@ -72,9 +72,9 @@ class BasePage {
 
     async waitForElement(locator) {
         // Assertion for an web element present on the Homepage (User comes at HomePage after successful login)
-        await page.locator.waitFor({ state: 'attached'})
-      }
-   
+        await page.locator.waitFor({ state: 'attached' })
+    }
+
 }
 
 
