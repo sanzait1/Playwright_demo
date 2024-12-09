@@ -6,84 +6,84 @@ const { expect } = require('@playwright/test');
 
 const value_map = new Map();
 
-Given('User go to the URL', async ()=> {
-    await global.page.goto('https://www.saucedemo.com/');
+Given('User go to the URL', async () => {
+  await global.page.goto('https://www.saucedemo.com/');
 });
 
-When('User enter {string} into {string} in {string}', async function (value, locatorName, pageName){
-    try{
-        const basePage = PageInstanceFactory.getPageInstance(pageName);
-        const locator = Reflect.get(basePage, locatorName);
-        await basePage.enterText(locator, value);
-        console.log("entered now")
-    } catch(error){
-      console.error(`Step failed due to:`, error)
-      throw new Error(`Doing Exit`);
-    }
-
-  });
-
-When('User click {string} in {string}', async function (locatorName, pageName){
+When('User enter {string} into {string} in {string}', async function (value, locatorName, pageName) {
   try {
-      const basePage = PageInstanceFactory.getPageInstance(pageName);
-      const locator = Reflect.get(basePage, locatorName);
-      await basePage.click(locator);
-      console.log("clicked now")
-  } 
-  catch (error){
-      console.error(`Step failed due to:`, error)
-      //throw new Error(`Doing Exit`);
-    }
+    const basePage = PageInstanceFactory.getPageInstance(pageName);
+    const locator = Reflect.get(basePage, locatorName);
+    await basePage.enterText(locator, value);
+    console.log("entered now")
+  } catch (error) {
+    console.error(`Step failed due to:`, error)
+    throw new Error(`Doing Exit`);
+  }
+
 });
 
-When('User click {string} with index {string} in {string}', async function (locatorName, index, pageName){
+When('User click {string} in {string}', async function (locatorName, pageName) {
   try {
-      const basePage = PageInstanceFactory.getPageInstance(pageName);
-      const locator = Reflect.get(basePage, locatorName);
-      await basePage.clickNthElement(locator, index);
-      console.log("clicked now")
-  } 
-  catch (error){
-      console.error(`Step failed due to:`, error)
-      //throw new Error(`Doing Exit`);
-    }
+    const basePage = PageInstanceFactory.getPageInstance(pageName);
+    const locator = Reflect.get(basePage, locatorName);
+    await basePage.click(locator);
+    console.log("clicked now")
+  }
+  catch (error) {
+    console.error(`Step failed due to:`, error)
+    //throw new Error(`Doing Exit`);
+  }
 });
 
-Then('User should see {string} in {string}', async function (locatorName, pageName){
+When('User click {string} with index {string} in {string}', async function (locatorName, index, pageName) {
   try {
-      const basePage = PageInstanceFactory.getPageInstance(pageName);
-      const locator = Reflect.get(basePage, locatorName);
-      const elementCount = await basePage.getLocatorCount(locator);
-      expect(elementCount).toHaveCount(1);
-  } 
-  catch (error){
-      console.error(`Step failed due to:`, error)
-      throw new Error(`Doing Exit`);
-    }
+    const basePage = PageInstanceFactory.getPageInstance(pageName);
+    const locator = Reflect.get(basePage, locatorName);
+    await basePage.clickNthElement(locator, index);
+    console.log("clicked now")
+  }
+  catch (error) {
+    console.error(`Step failed due to:`, error)
+    //throw new Error(`Doing Exit`);
+  }
 });
 
-Then('User extract {string} value within {string} in {string}', async function (locatorName, mapKey, pageName){
+Then('User should see {string} in {string}', async function (locatorName, pageName) {
   try {
-      const basePage = PageInstanceFactory.getPageInstance(pageName);
-      const textLocator = Reflect.get(basePage, locatorName);
-      const text = await basePage.getText(textLocator)
-      //const text = await locator.innerText();
-      value_map.set(mapKey, text)
-      console.log("map value is set")
-  } 
-  catch (error){
-      console.error(`Step failed due to:`, error)
-      throw new Error(`Doing Exit`);
-    }
+    const basePage = PageInstanceFactory.getPageInstance(pageName);
+    const locator = Reflect.get(basePage, locatorName);
+    const elementCount = await basePage.getLocatorCount(locator);
+    expect(elementCount).toHaveCount(1);
+  }
+  catch (error) {
+    console.error(`Step failed due to:`, error)
+    throw new Error(`Doing Exit`);
+  }
+});
+
+Then('User extract {string} value within {string} in {string}', async function (locatorName, mapKey, pageName) {
+  try {
+    const basePage = PageInstanceFactory.getPageInstance(pageName);
+    const textLocator = Reflect.get(basePage, locatorName);
+    const text = await basePage.getText(textLocator)
+    //const text = await locator.innerText();
+    value_map.set(mapKey, text)
+    console.log("map value is set")
+  }
+  catch (error) {
+    console.error(`Step failed due to:`, error)
+    throw new Error(`Doing Exit`);
+  }
 });
 
 
-Then('value comparison between {string} and {string} should be equal', async function (keyOne, keyTwo){
+Then('value comparison between {string} and {string} should be equal', async function (keyOne, keyTwo) {
   try {
     expect(value_map.get(keyOne)).to.be.equal(value_map.get(keyTwo), "values should be equal");
-  } 
-  catch (error){
-      console.error(`Step failed due to:`, error)
-    }
+  }
+  catch (error) {
+    console.error(`Step failed due to:`, error)
+  }
 });
 
